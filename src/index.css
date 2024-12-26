@@ -8,7 +8,36 @@
 }
 
 .public_gradient {
-  height: 100%;
+  background: #614385; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@media (min-width: 1024px) {
+  .public_gradient {
+    background: #614385; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #516395,
+      #614385
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #516395,
+      #614385
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+}
+
+.porque_elegirnos_gradient {
   background: #0f0c29; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -24,21 +53,23 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-@media (min-width: 1024px) {
-  .public_gradient {
-    height: 100vh;
-    background: #0f0c29; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #24243e,
-      #302b63,
-      #0f0c29
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #24243e,
-      #302b63,
-      #0f0c29
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.swiper {
+  width: 100%;
+  height: 100%;
+
+}
+
+.swiper-slide {
+  background: #fff;
+  height: calc((100% - 50px) / 1) !important;
+  padding: 1rem;
+}
+
+@media (min-width: 1280px) {  
+
+  .swiper-slide {
+    background: #fff;
+    height: calc((100% - 50px) / 1) !important;
+    padding: 2rem;
   }
 }

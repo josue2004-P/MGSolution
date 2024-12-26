@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import {
   ClientesAdmin,
@@ -8,13 +8,21 @@ import {
   InfoReparacion,
   ReparacionesAdmin,
 } from "../admin";
-import { PublicPage } from "../public";
+import { CatalagoPage, PublicPage } from "../public";
+
+
+
 
 export const AppRouter = () => {
   return (
     <Routes>
       <>
+        {/* PUBLICAS */}
         <Route path="/" element={<PublicPage />} />
+        <Route path="/catalago" element={<CatalagoPage />} />
+
+
+        {/* ADMIN */}
         <Route path="/dashboard" element={<HomeAdmin />} />
         <Route path="/equipos" element={<EquiposAdmin />} />
         <Route path="/clientes" element={<ClientesAdmin />} />

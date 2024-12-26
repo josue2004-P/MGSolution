@@ -6,6 +6,9 @@ export const uiSlice = createSlice({
     //TOOGLE NAVBAR
     isSidebarOpen: false,
 
+    //TOOGLE FILTER
+    isFilterOpen: false,
+
     //NAVBAR
     isNavbarOpen: false,
 
@@ -14,17 +17,22 @@ export const uiSlice = createSlice({
 
     // MODAL PRODUCTOS PEDIDO
     isProductoPedidosModalOpen: false,
-
   },
   reducers: {
     onToogleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
 
+    // FILTER
+    onToogleFilter: (state) => {
+      state.isFilterOpen = !state.isFilterOpen;
+    },
+
     // NAVBAR
     onToogleNavbar: (state) => {
       state.isNavbarOpen = !state.isNavbarOpen;
     },
+
     // PRODUCTO
     onOpenProductoUpdateModal: (state) => {
       state.isProductoUpdateModalOpen = true;
@@ -47,10 +55,11 @@ export const uiSlice = createSlice({
 export const {
   onToogleSidebar,
   onToogleNavbar,
+  onToogleFilter,
 
   onOpenProductoUpdateModal,
   onCloseProductoUpdateModal,
   // MODAL PRODUCTOS PEDIDO
   onOpenProductosPedidoModal,
-  onCloseProductosPedidoModal
+  onCloseProductosPedidoModal,
 } = uiSlice.actions;
