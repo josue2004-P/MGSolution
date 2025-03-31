@@ -17,6 +17,5 @@ export const clientes = [
     ciudad:"Veracruz",
     estado:"Veracruz",
     codigoPostal:99912
-
   },
 ];
