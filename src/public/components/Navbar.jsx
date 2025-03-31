@@ -1,31 +1,61 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useUiStore } from "../../hooks";
+import { useEffect, useRef } from "react";
 
-export default function Navbar() {
+export default function Navbar({ showCatalago }) {
+  const { isNavbarOpen, toogleNavbar } = useUiStore();
+  const sidebarRef = useRef(null);
+
+  const location = useLocation();
+  console.log("Ruta actual:", location.pathname);
+
+  const handleNavbar = () => {
+    toogleNavbar();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isNavbarOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target)
+      ) {
+        toogleNavbar();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isNavbarOpen, toogleNavbar]); // Añade isSidebarOpen y toogleSidebar al array de dependencias
+
   return (
     <>
-      <nav className=" ">
+      <nav className="absolute w-full  ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-              ReparaCel
+          <a className="flex items-center space-x-3 rtl:space-x-reverse">
+            <span className="self-center sm:text-2xl font-semibold whitespace-nowrap text-white">
+              MG CellSolution
             </span>
           </a>
-          <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Link
-              to={"/dashboard"}
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center "
-            >
-              Demo
-            </Link>
+          <div className="flex items-center md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
+            {showCatalago ? (
+              <Link
+                to={"/catalago"}
+                className="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg py-2 px-3 h-fit sm:h-full text-sm sm:px-4 sm:py-2 text-center "
+              >
+                Ver Catalago
+              </Link>
+            ) : (
+              ""
+            )}
             <button
-              data-collapse-toggle="navbar-cta"
+              onClick={() => handleNavbar()}
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-200 rounded-lg md:hidden   "
               aria-controls="navbar-cta"
+              ref={sidebarRef}
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
@@ -49,42 +79,47 @@ export default function Navbar() {
             </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className={` items-center justify-between w-full md:flex md:w-auto md:order-1  ${
+              isNavbarOpen ? "" : "hidden"
+            }`}
             id="navbar-cta"
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+            <ul
+              ref={sidebarRef}
+              className="backdrop-blur-sm z-10 relative flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 "
+            >
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent"
+                <Link
+                  to={"/"}
+                  onClick={() => handleNavbar()}
+                  className={`block py-2 px-3 md:p-0 text-white rounded md:bg-transparent md:hover:text-gray-300 ${
+                    location.pathname === "/" ? "text-yellow-500" : ""
+                  }`}
                   aria-current="page"
                 >
                   Inicio
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                <Link
+                  to={"/catalago"}
+                  onClick={() => handleNavbar()}
+                  className={`block py-2 px-3 md:p-0 text-white rounded md:bg-transparent md:hover:text-gray-300 ${
+                    location.pathname === "/catalago" ? "text-yellow-500" : ""
+                  }`}
                 >
-                  Servicios
-                </a>
+                  Catalago
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                <Link
+                  onClick={() => handleNavbar()}
+                  className={`block py-2 px-3 md:p-0 text-white rounded md:bg-transparent md:hover:text-gray-300 ${
+                    location.pathname === "/nosotros" ? "text-yellow-500" : ""
+                  }`}
                 >
-                  Objetivo
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  API
-                </a>
+                  Nosotros
+                </Link>
               </li>
             </ul>
           </div>

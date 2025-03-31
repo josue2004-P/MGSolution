@@ -4,7 +4,9 @@ import {
   onOpenProductoUpdateModal,
   onCloseProductoUpdateModal,
   onOpenProductosPedidoModal,
-  onCloseProductosPedidoModal
+  onCloseProductosPedidoModal,
+  onToogleNavbar,
+  onToogleFilter
 } from "../store";
 
 export const useUiStore = () => {
@@ -12,6 +14,8 @@ export const useUiStore = () => {
 
   const {
     isSidebarOpen,
+    isNavbarOpen,
+    isFilterOpen,
     isProductoUpdateModalOpen,
     isProductoPedidosModalOpen,
 
@@ -20,6 +24,16 @@ export const useUiStore = () => {
   // SIDEBAR
   const toogleSidebar = () => {
     dispatch(onToogleSidebar());
+  };
+
+  // FILTER
+  const toogleFilter = () => {
+    dispatch(onToogleFilter());
+  };
+
+  // NAVBAR
+  const toogleNavbar = () => {
+    dispatch(onToogleNavbar());
   };
 
   // MODAL UPDATE EQUIPO
@@ -40,6 +54,8 @@ export const useUiStore = () => {
 
   return {
     isSidebarOpen,
+    isFilterOpen,
+    isNavbarOpen,
     isProductoUpdateModalOpen,
     isProductoPedidosModalOpen,
 
@@ -51,5 +67,7 @@ export const useUiStore = () => {
     closeProductosPedidosModal,
 
     toogleSidebar,
+    toogleNavbar,
+    toogleFilter
   };
 };
