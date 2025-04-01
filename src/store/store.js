@@ -1,17 +1,38 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  authSlice,
+  // authSlice,
+  // uiSlice,
+  
+  // equipoSlice,
+  // clienteSlice,
+
+  // PUBLIC
+  marcaSlice,
+  categoriaSlice,
+  productoSlice
+
+} from "../modules/public/store";
+
+import {
   uiSlice,
-  equipoSlice,
-  clienteSlice,
-} from "./";
+} from "../modules/ui/store";
+
+import {
+  authSlice,
+} from "../modules/auth/store";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     ui: uiSlice.reducer,
-    equipo: equipoSlice.reducer,
-    cliente: clienteSlice.reducer
+    // equipo: equipoSlice.reducer,
+    // cliente: clienteSlice.reducer,
+
+    // PUBLIC
+    marca: marcaSlice.reducer,
+    categoria: categoriaSlice.reducer,
+    producto: productoSlice.reducer
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
